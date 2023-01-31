@@ -1,0 +1,47 @@
+.wrapper {
+  grid-area: sort;
+  margin: 0 auto;
+}
+
+.button {
+  box-sizing: border-box;
+  width: 168px;
+  height: 48px;
+  padding: 15px;
+  cursor: pointer;
+
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: #4a4a4a;
+
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #dfe5ec;
+
+  transition-duration: 0.2s;
+
+  &.selected {
+    background-color: #2196f3;
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: #53abf2;
+    color: #fff;
+  }
+
+  &.button:nth-child(1) {
+    border-radius: 5px 0 0 5px;
+  }
+
+  &.button:nth-child(2) {
+    border-radius: 0;
+  }
+
+  &.button:nth-child(3) {
+    border-radius: 0 5px 5px 0;
+  }
+}

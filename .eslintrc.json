@@ -38,6 +38,7 @@
     "react/prefer-stateless-function": 0,
     "react/jsx-props-no-spreading": 0,
     "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/control-has-associated-label": 0,
     "jsx-a11y/no-autofocus": [0],
     "jsx-a11y/anchor-is-valid": 0,
     "no-return-await": 0,
@@ -59,14 +60,7 @@
     "import/order": [
       2,
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
         "newlines-between": "always"
       }
     ]

@@ -1,0 +1,31 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+
+  background-color: #f3f7fa;
+  padding-bottom: 50px;
+}
+
+:root {
+  font-family: "Open Sans", sans-serif;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding-top: 50px;
+  max-width: 752px;
+
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "filters sort"
+    "filters tickets";
+
+  grid-template-columns: 232px 504px;
+  column-gap: 18px;
+}
