@@ -28,4 +28,14 @@ body {
 
   grid-template-columns: 232px 504px;
   column-gap: 18px;
+
+  @media (max-width: 765px) {
+    grid-template-areas:
+      "header"
+      "filters"
+      "sort"
+      "tickets";
+    grid-template-columns: auto;
+    justify-items: center;
+  }
 }

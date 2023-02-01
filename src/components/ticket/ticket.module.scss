@@ -13,6 +13,8 @@
   justify-content: space-between;
   margin-bottom: 20px;
   max-width: 462px;
+
+  align-items: center;
 }
 
 .body {
@@ -40,4 +42,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.price {
+  color: #2196f3;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
 }

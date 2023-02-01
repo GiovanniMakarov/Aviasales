@@ -7,6 +7,11 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 765px) {
+    width: 502px;
+    margin-bottom: 20px;
+  }
 }
 
 .header {
