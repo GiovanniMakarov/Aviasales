@@ -1,38 +1,54 @@
+import { connect } from "react-redux";
+
+import filterNames from "../../redux/filterNames";
+import { toggleFilterByName } from "../../redux/actions";
+
 import classes from "./filters.module.scss";
 
-export default function Filters() {
+function Filters({ onFilterChange, transfers }) {
+  const checkBoxesDict = [
+    { name: filterNames.all, label: "Все" },
+    { name: filterNames.noTransfers, label: "Без пересадок" },
+    { name: filterNames.oneTransfers, label: "1 пересадка" },
+    { name: filterNames.twoTranfers, label: "2 пересадки" },
+    { name: filterNames.threeTransfers, label: "3 пересадки" },
+  ].map((checkBox) => {
+    return {
+      ...checkBox,
+      isChecked: transfers[checkBox.name],
+    };
+  });
+
+  const checkBoxes = checkBoxesDict.map(({ name, label, isChecked }) => {
+    return (
+      <label key={name} className={classes.item}>
+        <input type="checkbox" onChange={() => onFilterChange(name)} checked={isChecked} />
+        <span className={classes.checkbox} />
+        <span>{label}</span>
+      </label>
+    );
+  });
+
   return (
     <div className={classes.filters}>
       <span className={classes.header}>Количество пересадок</span>
-      <label className={classes.item}>
-        <input type="checkbox" />
-        <span className={classes.checkbox} />
-        <span>Все</span>
-      </label>
-
-      <label className={classes.item}>
-        <input type="checkbox" />
-        <span className={classes.checkbox} />
-        <span>Без пересадок</span>
-      </label>
-
-      <label className={classes.item}>
-        <input type="checkbox" />
-        <span className={classes.checkbox} />
-        <span>1 пересадка</span>
-      </label>
-
-      <label className={classes.item}>
-        <input type="checkbox" />
-        <span className={classes.checkbox} />
-        <span>2 пересадки</span>
-      </label>
-
-      <label className={classes.item}>
-        <input type="checkbox" />
-        <span className={classes.checkbox} />
-        <span>3 пересадки</span>
-      </label>
+      {checkBoxes}
     </div>
   );
 }
+
+const mapStateToProps = ({ transfers }) => {
+  return {
+    transfers,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFilterChange: (name) => {
+      dispatch(toggleFilterByName(name));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);
