@@ -1,4 +1,5 @@
 import sortNames from "../sortNames";
+import fetchService from "../../service/service";
 
 const toggleFilterByName = (filterName) => {
   return {
@@ -29,4 +30,40 @@ const setSort = (name) => {
   }
 };
 
-export { toggleFilterByName, setSort };
+const setSearchID = () => {
+  return async (dispatch) => {
+    const id = await fetchService.getSearchId();
+
+    dispatch({
+      type: "SET_SEARCH_ID",
+      id: id.searchId,
+    });
+  };
+};
+
+const ticketsLoad = (searchID) => {
+  return async (dispatch) => {
+    dispatch({ type: "LOADING_START" });
+
+    let res = {};
+
+    try {
+      res = await fetchService.getPartOfTickets(searchID);
+    } catch (err) {
+      res = {
+        tickets: [],
+        stop: false,
+      };
+      dispatch({ type: "LOADING_ERROR" });
+    }
+
+    dispatch({
+      type: "TICKETS_LOAD",
+      data: res.tickets,
+      stop: res.stop,
+      loading: !res.stop,
+    });
+  };
+};
+
+export { toggleFilterByName, setSort, ticketsLoad, setSearchID };

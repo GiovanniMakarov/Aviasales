@@ -8,10 +8,13 @@ const initialState = {
   transfers: {
     [filterNames.all]: false,
     [filterNames.noTransfers]: false,
-    [filterNames.oneTransfers]: true,
+    [filterNames.oneTransfers]: false,
     [filterNames.twoTranfers]: false,
     [filterNames.threeTransfers]: false,
   },
+  id: null,
+  loading: false,
+  error: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -85,6 +88,42 @@ const reducer = (state = initialState, action) => {
         };
       }
       return newState;
+
+    case "SET_SEARCH_ID":
+      return {
+        ...state,
+        id: action.id,
+      };
+
+    case "TICKETS_LOAD":
+      return {
+        ...state,
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        tickets: [...state.tickets, ...action?.data],
+        stop: action.stop,
+        loading: action.loading,
+      };
+
+    case "LOADING_START":
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+
+    case "LOADING_SUCCES":
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      };
+
+    case "LOADING_ERROR":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
 
     default:
       return state;
