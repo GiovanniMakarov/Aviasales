@@ -7,7 +7,7 @@ const initialState = {
   sort: sortNames.fastest,
   transfers: {
     [filterNames.all]: false,
-    [filterNames.noTransfers]: false,
+    [filterNames.noTransfers]: true,
     [filterNames.oneTransfers]: false,
     [filterNames.twoTranfers]: false,
     [filterNames.threeTransfers]: false,
