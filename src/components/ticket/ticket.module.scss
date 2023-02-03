@@ -6,6 +6,10 @@
   border-radius: 5px;
 
   font-weight: 600;
+
+  @media (max-width: 755px) {
+    width: 80%;
+  }
 }
 
 .header {
@@ -26,7 +30,7 @@
   row-gap: 10px;
 
   @media (max-width: 755px) {
-    grid-template-columns: repeat(3, 136px);
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
