@@ -15,7 +15,7 @@ class FetchService {
     const res = await fetch(`${this._apiBase}/tickets?searchId=${searchID}`);
 
     if (!res.ok) {
-      throw new Error("Server response is not ok");
+      throw new Error("Can`t get searchID");
     }
 
     return res.json();
