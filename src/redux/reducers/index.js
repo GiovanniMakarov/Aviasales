@@ -4,13 +4,13 @@ import filterNames from "../filterNames";
 
 const initialState = {
   tickets: [],
-  sort: sortNames.fastest,
+  sort: sortNames.cheapest,
   transfers: {
-    [filterNames.all]: false,
+    [filterNames.all]: true,
     [filterNames.noTransfers]: true,
-    [filterNames.oneTransfers]: false,
-    [filterNames.twoTranfers]: false,
-    [filterNames.threeTransfers]: false,
+    [filterNames.oneTransfers]: true,
+    [filterNames.twoTranfers]: true,
+    [filterNames.threeTransfers]: true,
   },
   id: null,
   loading: false,
