@@ -19,11 +19,15 @@
 
 .body {
   display: grid;
-  width: 462px;
+  max-width: 462px;
   margin: 0;
   grid-template-columns: repeat(3, 154px);
 
   row-gap: 10px;
+
+  @media (max-width: 755px) {
+    grid-template-columns: repeat(3, 136px);
+  }
 }
 
 .name {

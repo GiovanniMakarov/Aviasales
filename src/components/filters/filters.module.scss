@@ -9,7 +9,7 @@
   flex-direction: column;
 
   @media (max-width: 765px) {
-    width: 502px;
+    width: 90%;
     margin-bottom: 20px;
   }
 }
@@ -65,7 +65,4 @@ input:checked + .checkbox {
   border-radius: 2px;
   margin-right: 10px;
   cursor: pointer;
-}
-
-.label {
 }
