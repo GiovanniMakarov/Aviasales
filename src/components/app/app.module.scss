@@ -9,6 +9,9 @@ body {
 
   background-color: #f3f7fa;
   padding-bottom: 50px;
+
+  @media (max-width: 750px) {
+  }
 }
 
 :root {
