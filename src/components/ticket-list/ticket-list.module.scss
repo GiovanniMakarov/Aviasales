@@ -35,5 +35,9 @@
 }
 
 .noFindMessage {
-  margin: 0 auto;
+  margin: 10px auto;
+  @media (max-width: 755px) {
+    width: 90%;
+    text-align: center;
+  }
 }
