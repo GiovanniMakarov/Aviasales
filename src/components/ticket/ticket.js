@@ -1,7 +1,9 @@
-import { add, format, minutesToMilliseconds } from "date-fns";
 import { Fragment } from "react";
 import classNames from "classnames";
 import { v4 as uuidv4 } from "uuid";
+
+import getFlyDuration from "../../helpers/getFlyDuration";
+import getFlyTimesInOut from "../../helpers/getFlyTimesInOut";
 
 import classes from "./ticket.module.scss";
 
@@ -24,10 +26,8 @@ export default function Ticket({ ticket }) {
 
 function TicketBody({ segments }) {
   const ways = segments.map(({ date, destination, duration, origin, stops }) => {
-    const dateOut = new Date(date);
-    const dateIn = add(dateOut, { minutes: duration });
-    const timesInOut = `${format(dateOut, "HH:mm")} - ${format(dateIn, "HH:mm")}`;
-    const flyDuration = format(new Date(minutesToMilliseconds(duration)), "HHч mmм");
+    const timesInOut = getFlyTimesInOut(date, duration);
+    const flyDuration = getFlyDuration(duration);
 
     const transfers = classNames({
       "Без пересадок": stops.length === 0,

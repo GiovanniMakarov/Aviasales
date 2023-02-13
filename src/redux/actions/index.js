@@ -1,9 +1,11 @@
 import sortNames from "../sortNames";
 import fetchService from "../../service/service";
 
+import actionTypes from "./actionTypes";
+
 const toggleFilterByName = (filterName) => {
   return {
-    type: "TOGGLE_FILTER",
+    type: actionTypes.TOGGLE_FILTER,
     payload: filterName,
   };
 };
@@ -12,19 +14,19 @@ const toggleFilterByName = (filterName) => {
 const setSort = (name) => {
   if (name === sortNames.cheapest) {
     return {
-      type: "SET_SORT_CHEAPEST",
+      type: actionTypes.SET_SORT_CHEAPEST,
       payload: sortNames.cheapest,
     };
   }
   if (name === sortNames.fastest) {
     return {
-      type: "SET_SORT_FASTEST",
+      type: actionTypes.SET_SORT_FASTEST,
       payload: sortNames.fastest,
     };
   }
   if (name === sortNames.optimal) {
     return {
-      type: "SET_SORT_OPTIMAL",
+      type: actionTypes.SET_SORT_OPTIMAL,
       payload: sortNames.optimal,
     };
   }
@@ -35,7 +37,7 @@ const setSearchID = () => {
     const id = await fetchService.getSearchId();
 
     dispatch({
-      type: "SET_SEARCH_ID",
+      type: actionTypes.SET_SEARCH_ID,
       id: id.searchId,
     });
   };
@@ -43,7 +45,7 @@ const setSearchID = () => {
 
 const ticketsLoad = (searchID) => {
   return async (dispatch) => {
-    dispatch({ type: "LOADING_START" });
+    dispatch({ type: actionTypes.LOADING_START });
 
     let res = {};
 
@@ -54,11 +56,11 @@ const ticketsLoad = (searchID) => {
         tickets: [],
         stop: false,
       };
-      dispatch({ type: "LOADING_ERROR" });
+      dispatch({ type: actionTypes.LOADING_ERROR });
     }
 
     dispatch({
-      type: "TICKETS_LOAD",
+      type: actionTypes.TICKETS_LOAD,
       data: res.tickets,
       stop: res.stop,
       loading: !res.stop,

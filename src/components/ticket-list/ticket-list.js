@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 
@@ -9,8 +9,16 @@ import Spinner from "../spinner";
 
 import classes from "./ticket-list.module.scss";
 
-function TicketList({ tickets, sort, transfers, loading }) {
-  const [index, setIndex] = useState(5);
+function TicketList() {
+  const countOfTicketsPerPage = 5;
+  const [index, setIndex] = useState(countOfTicketsPerPage);
+
+  const { tickets, loading } = useSelector((store) => store.service);
+  const { sort, transfers } = useSelector((store) => store.filter);
+
+  function showMore() {
+    setIndex((el) => el + countOfTicketsPerPage);
+  }
 
   const filteredTickets = filterNames(tickets, transfers);
   const sortedTickets = sortTickets(filteredTickets, sort);
@@ -29,20 +37,11 @@ function TicketList({ tickets, sort, transfers, loading }) {
     <div className={classes.list}>
       {spinner}
       {ticketsToRender}
-      <button type="button" className={classes.button_more} onClick={() => setIndex((el) => el + 5)}>
-        Показать еще 5 билетов!
+      <button type="button" className={classes.button_more} onClick={showMore}>
+        Показать еще {countOfTicketsPerPage} билетов!
       </button>
     </div>
   );
 }
 
-const mapStateToProps = ({ tickets, sort, transfers, loading }) => {
-  return {
-    tickets,
-    sort,
-    transfers,
-    loading,
-  };
-};
-
-export default connect(mapStateToProps)(TicketList);
+export default TicketList;

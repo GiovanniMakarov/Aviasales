@@ -1,25 +1,26 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import filterNames from "../../redux/filterNames";
+import checkboxesDictionary from "../../helpers/checkboxesDictionary";
 import { toggleFilterByName } from "../../redux/actions";
 
 import classes from "./filters.module.scss";
 
-function Filters({ onFilterChange, transfers }) {
-  const checkBoxesDict = [
-    { name: filterNames.all, label: "Все" },
-    { name: filterNames.noTransfers, label: "Без пересадок" },
-    { name: filterNames.oneTransfers, label: "1 пересадка" },
-    { name: filterNames.twoTranfers, label: "2 пересадки" },
-    { name: filterNames.threeTransfers, label: "3 пересадки" },
-  ].map((checkBox) => {
+function Filters() {
+  const transfers = useSelector((store) => store.filter.transfers);
+  const dispatch = useDispatch();
+
+  function onFilterChange(name) {
+    dispatch(toggleFilterByName(name));
+  }
+
+  const newCheckboxesDictionary = checkboxesDictionary.map((checkBox) => {
     return {
       ...checkBox,
       isChecked: transfers[checkBox.name],
     };
   });
 
-  const checkBoxes = checkBoxesDict.map(({ name, label, isChecked }) => {
+  const checkBoxes = newCheckboxesDictionary.map(({ name, label, isChecked }) => {
     return (
       <label key={name} className={classes.item}>
         <input type="checkbox" onChange={() => onFilterChange(name)} checked={isChecked} />
@@ -37,18 +38,4 @@ function Filters({ onFilterChange, transfers }) {
   );
 }
 
-const mapStateToProps = ({ transfers }) => {
-  return {
-    transfers,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFilterChange: (name) => {
-      dispatch(toggleFilterByName(name));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+export default Filters;

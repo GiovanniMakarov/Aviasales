@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { ticketsLoad, setSearchID } from "../../redux/actions";
@@ -9,14 +9,17 @@ import TicketList from "../ticket-list";
 
 import classes from "./app.module.scss";
 
-function App({ id, stop, tickets, dispTicketsLoad, dispSearchId }) {
+function App() {
+  const { id, stop, tickets } = useSelector((store) => store.service);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispSearchId();
+    dispatch(setSearchID());
   }, []);
 
   useEffect(() => {
     if (id && !stop) {
-      dispTicketsLoad(id);
+      dispatch(ticketsLoad(id));
     }
   }, [id, tickets]);
 
@@ -30,25 +33,4 @@ function App({ id, stop, tickets, dispTicketsLoad, dispSearchId }) {
   );
 }
 
-const mapStateToProps = ({ id, tickets, stop, error }) => {
-  return {
-    id,
-    tickets,
-    stop,
-    error,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispTicketsLoad: (id) => {
-      dispatch(ticketsLoad(id));
-    },
-
-    dispSearchId: () => {
-      dispatch(setSearchID());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import sortNames from "../../redux/sortNames";
 import { setSort } from "../../redux/actions";
@@ -7,8 +7,13 @@ import classes from "./sorting.module.scss";
 
 const classNames = require("classnames");
 
-function Sorting(props) {
-  const { onSortChange } = props;
+function Sorting() {
+  const sort = useSelector((store) => store.filter.sort);
+  const dispatch = useDispatch();
+
+  function onSortChange(name) {
+    dispatch(setSort(name));
+  }
 
   const buttonsDict = [
     { name: sortNames.cheapest, label: "Самый дешевый" },
@@ -18,7 +23,7 @@ function Sorting(props) {
 
   const buttons = buttonsDict.map(({ name, label }) => {
     const clazz = classNames({
-      [classes.selected]: props.sort === name,
+      [classes.selected]: sort === name,
     });
 
     return (
@@ -31,18 +36,4 @@ function Sorting(props) {
   return <div className={classes.wrapper}>{buttons}</div>;
 }
 
-const mapStateToProps = ({ sort }) => {
-  return {
-    sort,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSortChange: (name) => {
-      dispatch(setSort(name));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+export default Sorting;

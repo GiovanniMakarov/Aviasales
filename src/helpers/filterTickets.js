@@ -21,7 +21,7 @@ export default function filterTickets(tickets, filters) {
         );
         result = [...result, ...arr];
       }
-      if (key === filterNames.twoTranfers) {
+      if (key === filterNames.twoTransfers) {
         const arr = tickets.filter(
           (el) =>
             (el.segments[0].stops.length === 2 && el.segments[1].stops.length <= 2) ||
